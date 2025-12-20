@@ -13,3 +13,27 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class Product(models.Model):
+    REMARK_CHOICES = [
+        ('popular', 'popular'),
+        ('new', 'new'),
+        ('top', 'top'),
+        ('special', 'special'),
+    ]
+
+    title = models.CharField(max_length=100)
+    short_des = models.CharField(max_length=255)
+    price = models.CharField(max_length=50)
+    discount = models.PositiveSmallIntegerField()
+    discount_price = models.CharField(max_length=50)
+    image = models.CharField(max_length=255)
+    stock = models.PositiveSmallIntegerField()
+    star = models.FloatField()
+    remark = models.CharField(max_length=50, choices=REMARK_CHOICES)
+
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
