@@ -159,3 +159,17 @@ class InvoiceProduct(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class SSLCommerzAccount(models.Model):
+    store_id = models.CharField(max_length=255)
+    store_passwd = models.CharField(max_length=255)
+    currency = models.CharField(max_length=255)
+
+    success_url = models.CharField(max_length=255)
+    fail_url = models.CharField(max_length=255)
+    cancel_url = models.CharField(max_length=255)
+    ipn_url = models.CharField(max_length=255)
+    init_url = models.CharField(max_length=255)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
