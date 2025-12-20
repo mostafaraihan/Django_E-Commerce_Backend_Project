@@ -4,12 +4,14 @@ from django.db import models
 class Brand(models.Model):
     brandName = models.CharField(max_length=100)
     brandImg = models.CharField(max_length=255)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Category(models.Model):
     categoryName = models.CharField(max_length=100)
     categoryImg = models.CharField(max_length=255)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -59,6 +61,13 @@ class ProductDetail(models.Model):
     size = models.CharField(max_length=255)
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class User(models.Model):
+    email = models.EmailField()
+    otp = models.CharField()
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
