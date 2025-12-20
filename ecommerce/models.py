@@ -123,3 +123,28 @@ class ProductWish(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Invoice(models.Model):
+    DELIVERY_STATUS = [
+        ('pending', 'pending'),
+        ('processing', 'processing'),
+        ('delivered', 'delivered'),
+    ]
+
+    total = models.CharField(max_length=50)
+    vat = models.CharField(max_length=50)
+    payable = models.CharField(max_length=50)
+
+    cus_detail = models.CharField(max_length=255)
+    ship_detail = models.CharField(max_length=255)
+
+    tran_id = models.CharField(max_length=255)
+    val_id = models.CharField(max_length=255)
+
+    delivery_status = models.CharField(max_length=25, choices=DELIVERY_STATUS)
+    payment_status = models.CharField(max_length=50)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
