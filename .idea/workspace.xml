@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3341c763-0ed5-4952-87fb-bd4a73948a7b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ecommerce/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Django_E_Commerce_Backend_Project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django_E_Commerce_Backend_Project/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Django_E_Commerce_Backend_Project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django_E_Commerce_Backend_Project/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -42,12 +41,16 @@
   "associatedIndex": 2
 }]]></component>
   <component name="ProjectId" id="3765Dm3FgpxlD2kA5PnBBWdigx2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "Django Server.Django_E-Commerce_Backend_Project.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
@@ -56,6 +59,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "django.template.preview.state": "SHOW_EDITOR",
     "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -113,7 +117,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1766210562842</updated>
-      <workItem from="1766210563837" duration="326000" />
+      <workItem from="1766210563837" duration="508000" />
     </task>
     <servers />
   </component>
