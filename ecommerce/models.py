@@ -173,3 +173,15 @@ class SSLCommerzAccount(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Policy(models.Model):
+    POLICY_TYPE = [
+        ('about', 'About'),
+        ('refund', 'Refund'),
+        ('privacy', 'Privacy'),
+        ('terms', 'Terms'),
+    ]
+
+    type = models.CharField(max_length=50, choices=POLICY_TYPE)
+
+    des = models.TextField()
