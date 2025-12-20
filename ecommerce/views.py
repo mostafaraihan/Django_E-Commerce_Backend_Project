@@ -33,5 +33,5 @@ def product_details(request, product_id):
     pass
 
 
-def product_list(request):
+def product_by_brand(request, brand):
     pass
