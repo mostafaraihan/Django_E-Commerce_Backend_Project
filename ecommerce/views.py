@@ -1,5 +1,11 @@
 from django.shortcuts import render
-
+from .models import (
+Brand,
+Category,
+Product,
+ProductSlider,
+ProductDetail
+)
 
 def index(request):
     return render(request,'index.html')
