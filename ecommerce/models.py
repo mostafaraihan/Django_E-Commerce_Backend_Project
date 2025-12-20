@@ -37,3 +37,13 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class ProductSlider(models.Model):
+    title = models.CharField(max_length=100)
+    short_des = models.CharField(max_length=255)
+    price = models.CharField(max_length=50)
+    image = models.CharField(max_length=255)
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
