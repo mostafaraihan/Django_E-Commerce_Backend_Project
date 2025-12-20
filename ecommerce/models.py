@@ -47,3 +47,18 @@ class ProductSlider(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class ProductDetail(models.Model):
+    img1 = models.CharField(max_length=255)
+    img2 = models.CharField(max_length=255)
+    img3 = models.CharField(max_length=255)
+    img4 = models.CharField(max_length=255)
+
+    des = models.TextField()
+    color = models.CharField(max_length=255)
+    size = models.CharField(max_length=255)
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
