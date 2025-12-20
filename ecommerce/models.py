@@ -183,5 +183,4 @@ class Policy(models.Model):
     ]
 
     type = models.CharField(max_length=50, choices=POLICY_TYPE)
-
     des = models.TextField()
