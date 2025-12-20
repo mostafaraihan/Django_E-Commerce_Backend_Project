@@ -108,6 +108,9 @@
       </set>
     </attachedChunks>
   </component>
+  <component name="StructureViewState">
+    <option name="selectedTab" value="Logical" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="3341c763-0ed5-4952-87fb-bd4a73948a7b" name="Changes" comment="" />
@@ -115,7 +118,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1766210562842</updated>
-      <workItem from="1766210563837" duration="1880000" />
+      <workItem from="1766210563837" duration="2095000" />
     </task>
     <servers />
   </component>

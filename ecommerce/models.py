@@ -71,3 +71,26 @@ class User(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class CustomerProfile(models.Model):
+    cus_name = models.CharField(max_length=100)
+    cus_add = models.CharField(max_length=255)
+    cus_city = models.CharField(max_length=255)
+    cus_state = models.CharField(max_length=255)
+    cus_postcode = models.CharField(max_length=255)
+    cus_country = models.CharField(max_length=255)
+    cus_phone = models.CharField(max_length=255)
+    cus_fax = models.CharField(max_length=255)
+
+    ship_name = models.CharField(max_length=100)
+    ship_add = models.CharField(max_length=255)
+    ship_city = models.CharField(max_length=255)
+    ship_state = models.CharField(max_length=255)
+    ship_postcode = models.CharField(max_length=255)
+    ship_country = models.CharField(max_length=255)
+    ship_phone = models.CharField(max_length=255)
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
