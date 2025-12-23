@@ -13,12 +13,16 @@ def index(request):
 
 
 def brand_list(request):
-    data = list(Brand.objects.values('id','brandName', 'brandImg'))
+    data = list(Brand.objects.values(
+        'id','brandName', 'brandImg'
+    ))
     return JsonResponse({'status':True, 'message':'success', 'data':data})
 
 
 def category_list(request):
-    data = list(Category.objects.values('id', 'categoryName', 'categoryImg'))
+    data = list(Category.objects.values(
+        'id', 'categoryName', 'categoryImg'
+    ))
     return JsonResponse({'status': True, 'message': 'success', 'data': data})
 
 
@@ -37,8 +41,10 @@ def product_by_remark(request, remark):
 
 
 def product_slider_list(request):
-    pass
-
+    data = list(ProductSlider.objects.values(
+        'id', 'title', 'short_des', 'price', 'image'
+    ))
+    return JsonResponse({'status': True, 'message': 'success', 'data': data})
 
 def product_by_keyword(request):
     pass
