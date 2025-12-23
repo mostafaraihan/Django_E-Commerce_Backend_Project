@@ -18,13 +18,12 @@ def brand_list(request):
 
 
 def category_list(request):
-    pass
+    data = list(Category.objects.values('id', 'categoryName', 'categoryImg'))
+    return JsonResponse({'status': True, 'message': 'success', 'data': data})
 
 
 def product_by_category(request, category_id):
     pass
-
-
 def product_by_remark(request, remark):
     pass
 
