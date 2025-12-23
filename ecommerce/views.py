@@ -23,7 +23,12 @@ def category_list(request):
 
 
 def product_by_category(request, category_id):
-    pass
+    data = list(Product.objects.filter(categoryId=category_id).values(
+        'id', 'title', 'price', 'discount_price', 'image', 'remark', 'star'
+    ))
+    return JsonResponse({'status': True, 'message': 'success', 'data': data})
+
+
 def product_by_remark(request, remark):
     pass
 
