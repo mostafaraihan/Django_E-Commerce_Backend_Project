@@ -47,7 +47,14 @@ def product_slider_list(request):
     return JsonResponse({'status': True, 'message': 'success', 'data': data})
 
 def product_by_keyword(request):
-    pass
+    keyword = request.GET.get('keyword', '')
+
+    data = list(Product.objects.filter(
+        title__incontains=keyword
+    ).values(
+        'id', 'title', 'price', 'discount_price', 'image', 'remark', 'star'
+    ))
+    return JsonResponse({'status': True, 'message': 'success', 'data': data})
 
 
 def product_details(request, product_id):
