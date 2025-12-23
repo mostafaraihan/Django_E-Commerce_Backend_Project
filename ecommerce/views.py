@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from .models import (
 Brand,
@@ -12,7 +13,8 @@ def index(request):
 
 
 def brand_list(request):
-    pass
+    data = list(Brand.objects.values('id','brandName', 'brandImg'))
+    return JsonResponse({'status':True, 'message':'success', 'data':data})
 
 
 def category_list(request):
