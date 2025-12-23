@@ -58,7 +58,20 @@ def product_by_keyword(request):
 
 
 def product_details(request, product_id):
-    pass
+    product = Product.objects.values(
+        'id', 'title', 'price', 'discount_price', 'image', 'remark', 'star'
+    ).get(id=product_id)
+
+    details = ProductDetail.objects.values(
+        'img1', 'img2', 'img3', 'img4', 'des', 'color', 'size'
+    ).get(id=product_id)
+
+    data = {
+        'product': product,
+        'details': details,
+    }
+
+    return JsonResponse({'status': True, 'message': 'success', 'data': data})
 
 
 def product_by_brand(request, brand):
