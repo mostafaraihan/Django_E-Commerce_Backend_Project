@@ -49,4 +49,7 @@ def product_details(request, product_id):
 
 
 def product_by_brand(request, brand):
-    pass
+    data = list(Product.objects.filter(brandId=brand).values(
+        'id', 'title', 'price', 'discount_price', 'image', 'remark', 'star'
+    ))
+    return JsonResponse({'status': True, 'message': 'success', 'data': data})
