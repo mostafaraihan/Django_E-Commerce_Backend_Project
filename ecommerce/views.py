@@ -30,7 +30,10 @@ def product_by_category(request, category_id):
 
 
 def product_by_remark(request, remark):
-    pass
+    data = list(Product.objects.filter(remark=remark).values(
+        'id', 'title', 'price', 'discount_price', 'image', 'remark', 'star'
+    ))
+    return JsonResponse({'status': True, 'message': 'success', 'data': data})
 
 
 def product_slider_list(request):
