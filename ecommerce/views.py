@@ -1,11 +1,14 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+import json,random
 from .models import (
     Brand,
     Category,
     Product,
     ProductSlider,
-    ProductDetail
+    ProductDetail,
+    User,
 )
 
 
@@ -199,3 +202,24 @@ def product_by_brand(request, brand_id):
         'message': 'success',
         'data': data
     })
+
+
+
+#Login
+@csrf_exempt
+def user_login(request):
+    data = json.loads(request.body)
+    email = data.get('email', '').strip()
+
+    if not email:
+        return JsonResponse({'status': False, 'message': 'Email is required'}, status=400)
+
+    otp = str(random.randint(1000, 9999))
+
+    user,created = User.objects.get_or_create(email=email, defaults={'otp': otp})
+
+    if not created:
+        user.otp = otp
+        user.save()
+
+    return JsonResponse({'status': True, 'message': f"{otp}"}, status=200)
