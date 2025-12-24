@@ -135,6 +135,7 @@ def product_by_keyword(request):
 # -------------------- PRODUCT DETAILS --------------------
 def product_details(request, product_id):
     try:
+        # Fetch product data
         product = Product.objects.values(
             'id',
             'title',
@@ -145,7 +146,8 @@ def product_details(request, product_id):
             'star'
         ).get(id=product_id)
 
-        details = ProductDetail.objects.values(
+        # Fetch all product details
+        details = list(ProductDetail.objects.filter(product__id=product_id).values(
             'img1',
             'img2',
             'img3',
@@ -153,7 +155,7 @@ def product_details(request, product_id):
             'des',
             'color',
             'size'
-        ).get(product__id=product_id)
+        ))
 
         data = {
             'product': product,
@@ -173,12 +175,7 @@ def product_details(request, product_id):
             'data': None
         })
 
-    except ProductDetail.DoesNotExist:
-        return JsonResponse({
-            'status': False,
-            'message': 'Product details not found',
-            'data': None
-        })
+
 
 
 # -------------------- PRODUCT BY BRAND --------------------
