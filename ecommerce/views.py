@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-import json,random
+
+import json,random,string
+
 from .models import (
     Brand,
     Category,
@@ -214,7 +216,8 @@ def user_login(request):
     if not email:
         return JsonResponse({'status': False, 'message': 'Email is required'}, status=400)
 
-    otp = str(random.randint(1000, 9999))
+    characters = string.ascii_lowercase + '123456789'
+    otp = ''.join(random.choice(characters) for _ in range(5))
 
     user,created = User.objects.get_or_create(email=email, defaults={'otp': otp})
 
@@ -222,4 +225,4 @@ def user_login(request):
         user.otp = otp
         user.save()
 
-    return JsonResponse({'status': True, 'message': f"{otp}"}, status=200)
+    return JsonResponse({'status': True, 'message': f"{otp} OTP sent Successfully"}, status=200)
