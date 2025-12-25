@@ -135,17 +135,17 @@ DEFAULT_FROM_EMAIL = 'raihan.invite@gmail.com'
 
 DAISY_SETTINGS = {
     # Branding
-    'SITE_TITLE': 'Django Admin',
-    'SITE_HEADER': 'Administration',
-    'INDEX_TITLE': 'Hi, welcome to your dashboard',
-    'SITE_LOGO': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ89726Sf5MHXH_TKcM-Fmy1WdX9dEBYCBefw&s',
+    'SITE_TITLE': 'E-Commerce Admin',
+    'SITE_HEADER': 'E-Commerce Web Application',
+    'INDEX_TITLE': 'Hi, Welcome to E-Commerce Admin Dashboard',
+    'SITE_LOGO': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ89726Sf5MHXH_TKcM-Fmy1WdX9dEBYCBefw&',
 
     # Customization
     'EXTRA_STYLES': [],  # Additional CSS files
     'EXTRA_SCRIPTS': [],  # Additional JS files
     'LOAD_FULL_STYLES': False,  # Load complete DaisyUI library
     'SHOW_CHANGELIST_FILTER': False,  # Auto-open filter sidebar
-    'DONT_SUPPORT_ME': False,  # Hide GitHub link
+    'DONT_SUPPORT_ME': True,  # Hide GitHub link
     'SIDEBAR_FOOTNOTE': '',  # Custom sidebar footer text
 
     # Theme Configuration
