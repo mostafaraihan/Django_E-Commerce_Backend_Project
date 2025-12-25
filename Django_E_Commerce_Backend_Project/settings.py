@@ -138,7 +138,7 @@ DAISY_SETTINGS = {
     'SITE_TITLE': 'Django Admin',
     'SITE_HEADER': 'Administration',
     'INDEX_TITLE': 'Hi, welcome to your dashboard',
-    'SITE_LOGO': '/static/admin/img/daisyui-logomark.svg',
+    'SITE_LOGO': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ89726Sf5MHXH_TKcM-Fmy1WdX9dEBYCBefw&s',
 
     # Customization
     'EXTRA_STYLES': [],  # Additional CSS files
