@@ -1,15 +1,13 @@
 import json
 import random
-from datetime import datetime, timedelta, timezone
-
 import jwt
+from datetime import datetime, timedelta, timezone
 from django.conf import settings
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
+from .models import (Brand,Category,Product,ProductSlider,ProductDetail,User,ProductCart,ProductWish,Invoice,InvoiceProduct)
 from .auth_middleware import jwt_required
-from .models import (Brand, Category, Product, ProductSlider, ProductDetail, User, ProductCart, ProductWish, Invoice, InvoiceProduct)
 
 
 def home(request):
@@ -258,9 +256,9 @@ def wish_add(request):
         return JsonResponse({"status": False, "message": "Product ID is required"})
 
     try:
-        Product.objects.get(id=product_id)
+        product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
-        return JsonResponse({"status": False, "message": "Product not found"})
+        return JsonResponse({"status": False, "message": "Product not found", })
 
     wish_item, created = ProductWish.objects.get_or_create(
         user_id=request.user_id,

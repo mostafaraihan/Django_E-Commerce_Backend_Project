@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3341c763-0ed5-4952-87fb-bd4a73948a7b" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,7 +132,7 @@
       <workItem from="1766555479296" duration="6869000" />
       <workItem from="1766681899403" duration="3212000" />
       <workItem from="1766763656767" duration="145000" />
-      <workItem from="1767023443547" duration="2362000" />
+      <workItem from="1767023443547" duration="3243000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <option name="closed" value="true" />
