@@ -1,20 +1,19 @@
 import json
 import random
-from datetime import datetime, timedelta, timezone
-
 import jwt
+from datetime import datetime, timedelta, timezone
 from django.conf import settings
-from django.http.response import JsonResponse
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
+from django.http.response import JsonResponse, HttpResponseRedirect,HttpResponseNotFound
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
+from .models import (Brand,Category,Product,ProductSlider,ProductDetail,User,ProductCart,ProductWish,Invoice,InvoiceProduct)
 from .auth_middleware import jwt_required
-from .models import (Brand, Category, Product, ProductSlider, ProductDetail, User, ProductCart, ProductWish, Invoice,
-                     InvoiceProduct)
 
 
 def home(request):
-    return render(request,'index.html')
+    return render(request,'home.html')
 
 # Before Login
 def brand_list(request):
