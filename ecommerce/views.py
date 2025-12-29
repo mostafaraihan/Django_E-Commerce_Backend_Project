@@ -1,9 +1,13 @@
+from datetime import timezone
+
+import jwt
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
+from datetime import datetime,timedelta
 import json,random,string
 
+from Django_E_Commerce_Backend_Project import settings
 from .models import (
     Brand,
     Category,
@@ -226,3 +230,36 @@ def user_login(request):
         user.save()
 
     return JsonResponse({'status': True, 'message': f"{otp} OTP sent Successfully"}, status=200)
+
+
+@csrf_exempt
+def varify_otp(request):
+    data = json.loads(request.body)
+    email = data.get('email', '').strip()
+    otp = data.get('otp', '').strip()
+
+    if not email or not otp:
+        return JsonResponse({'status': False, 'message': 'Email or OTP is required'}, status=400)
+
+    try:
+        user = User.objects.get(email=email, otp=otp)
+
+    except User.DoesNotExist:
+        return JsonResponse({'status': False, 'message': 'User not found'}, status=400)
+
+    payload = {
+        'user_id': user.id,
+        'user_email': user.email,
+        'exp':datetime.now(timezone.utc) + timedelta(days=30),
+        'iat':datetime.now(timezone.utc),
+    }
+
+    token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
+
+    return JsonResponse({
+        'status': True,
+        'message': 'success',
+        'token': token,
+        'data': {'user_id': user.id, 'user_email': user.email}
+    })
+

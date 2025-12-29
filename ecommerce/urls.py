@@ -16,4 +16,5 @@ urlpatterns = [
     path('products/<int:product_id>/', views.product_details),
 
     path('login/', views.user_login),
+    path('varify-otp/', views.varify_otp),
 ]
