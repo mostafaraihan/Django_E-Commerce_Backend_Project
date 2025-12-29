@@ -233,7 +233,7 @@ def user_login(request):
 
 
 @csrf_exempt
-def varify_otp(request):
+def verify_otp(request):
     data = json.loads(request.body)
     email = data.get('email', '').strip()
     otp = data.get('otp', '').strip()
