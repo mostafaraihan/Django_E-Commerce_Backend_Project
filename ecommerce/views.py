@@ -94,26 +94,32 @@ def product_by_keyword(request):
     })
 
 def product_details(request, product_id):
-    product = Product.objects.values(
-        "id", "title", "price",
-        "discount", "discount_price",
-        "image", "remark", "star"
-    ).get(id=product_id)
 
-    details = ProductDetail.objects.values(
+    try:
+        product = Product.objects.values(
+            "id", "title", "price",
+            "discount", "discount_price",
+            "image", "remark", "star"
+        ).get(id=product_id)
+    except Product.DoesNotExist:
+        return JsonResponse({"status": False, "message": "Product not found"}, status=404)
+
+    details = list(ProductDetail.objects.filter(product_id=product_id).values(
         "img1", "img2", "img3", "img4",
         "des", "color", "size"
-    ).get(product_id=product_id)
+    ))
 
     data = {
         "product": product,
         "details": details
     }
+
     return JsonResponse({
         "status": True,
         "message": "success",
         "data": data
     })
+
 
 def product_by_brand(request, brand_id):
     data = list(
