@@ -1,8 +1,11 @@
 import json
 import random
+from decimal import Decimal
+
 import jwt
 from datetime import datetime, timedelta, timezone
 from django.conf import settings
+from django.db import transaction
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -256,7 +259,7 @@ def wish_add(request):
         return JsonResponse({"status": False, "message": "Product ID is required"})
 
     try:
-        product = Product.objects.get(id=product_id)
+        pass
     except Product.DoesNotExist:
         return JsonResponse({"status": False, "message": "Product not found", })
 
@@ -304,63 +307,76 @@ def wish_list(request):
 @csrf_exempt
 @jwt_required
 def create_invoice(request):
-    data = json.loads(request.body)
-    cus_details = data.get('cus_details', '')
-    ship_details = data.get('ship_details', '')
+    # Parse JSON safely
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({"status": False, "message": "Invalid JSON"}, status=400)
+
+    # Get customer and shipping details
+    cus_details = data.get('cus_details', '').strip()
+    ship_details = data.get('ship_details', '').strip()
 
     if not cus_details or not ship_details:
-        return JsonResponse({"status": False, "message": "Customer and shipping details required"})
+        return JsonResponse({"status": False, "message": "Customer and shipping details required"}, status=400)
 
+    # Get user's cart items
     cart_items = ProductCart.objects.filter(user_id=request.user_id)
-
     if not cart_items.exists():
-        return JsonResponse({"status": False, "message": "Cart is empty"})
+        return JsonResponse({"status": False, "message": "Cart is empty"}, status=400)
 
-    total = 0
+    # Calculate totals using Decimal for safety
+    total = Decimal('0.00')
     for item in cart_items:
-        total += int(item.qty) * float(item.price)
-
-    vat = total * 0.05
+        total += Decimal(item.qty) * Decimal(item.price)
+    vat = total * Decimal('0.05')
     payable = total + vat
 
+    # Generate transaction ID
     tran_id = f"TXN{request.user_id}{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
-    invoice = Invoice.objects.create(
-        user_id=request.user_id,
-        total=str(total),
-        vat=str(vat),
-        payable=str(payable),
-        cus_details=cus_details,
-        ship_details=ship_details,
-        tran_id=tran_id,
-        val_id='',
-        delivery_status='pending',
-        payment_status='pending'
-    )
+    # Use atomic transaction to ensure DB consistency
+    try:
+        with transaction.atomic():
+            invoice = Invoice.objects.create(
+                user_id=request.user_id,
+                total=total,
+                vat=vat,
+                payable=payable,
+                cus_details=cus_details,
+                ship_details=ship_details,
+                tran_id=tran_id,
+                val_id='',
+                delivery_status='pending',
+                payment_status='pending'
+            )
 
-    for item in cart_items:
-        InvoiceProduct.objects.create(
-            invoice_id=invoice.id,
-            product_id=item.product_id,
-            user_id=request.user_id,
-            qty=item.qty,
-            sale_price=item.price
-        )
+            # Create InvoiceProduct entries
+            for item in cart_items:
+                InvoiceProduct.objects.create(
+                    invoice_id=invoice.id,
+                    product_id=item.product_id,
+                    user_id=request.user_id,
+                    qty=item.qty,
+                    sale_price=item.price
+                )
 
-    cart_items.delete()
+            # Clear cart
+            cart_items.delete()
 
-    return JsonResponse({
-        "status": True,
-        "message": "Invoice created successfully",
-        "data": {
-            "invoice_id": invoice.id,
-            "tran_id": tran_id,
-            "total": str(total),
-            "vat": str(vat),
-            "payable": str(payable)
-        }
-    })
-
+        return JsonResponse({
+            "status": True,
+            "message": "Invoice created successfully",
+            "data": {
+                "invoice_id": invoice.id,
+                "tran_id": tran_id,
+                "total": str(total),
+                "vat": str(vat),
+                "payable": str(payable)
+            }
+        })
+    except Exception as e:
+        return JsonResponse({"status": False, "message": f"Failed to create invoice: {str(e)}"}, status=500)
 
 @jwt_required
 def invoice_list(request):
