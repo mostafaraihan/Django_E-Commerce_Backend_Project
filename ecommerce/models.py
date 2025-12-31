@@ -123,9 +123,9 @@ class Invoice(models.Model):
         ('delivered', 'Delivered'),
     ]
 
-    total = models.CharField(max_length=50)
-    vat = models.CharField(max_length=50)
-    payable = models.CharField(max_length=50)
+    total = models.DecimalField(max_digits=50, decimal_places=2)
+    vat = models.DecimalField(max_digits=50, decimal_places=2)
+    payable = models.DecimalField(max_digits=50, decimal_places=2)
 
     cus_details = models.CharField(max_length=255)
     ship_details = models.CharField(max_length=255)
