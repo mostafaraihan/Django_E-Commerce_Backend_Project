@@ -102,24 +102,7 @@ def product_details(request, product_id):
             "image", "remark", "star"
         ).get(id=product_id)
     except Product.DoesNotExist:
-        return JsonResponse({"status": False, "message": "Product not found"}, status=404)t: 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-(.venv) raihan@hp:~/Documents/Django/Django_E-Commerce_Backend_Project$ git push
-To https://github.com/mostafaraihan/Django_E-Commerce_Backend_Project.git
- ! [rejected]        master -> master (fetch first)
-error: failed to push some refs to 'https://github.com/mostafaraihan/Django_E-Commerce_Backend_Project.git'
-hint: Updates were rejected because the remote contains work that you do not
-hint: have locally. This is usually caused by another repository pushing to
-hint: the same ref. If you want to integrate the remote changes, use
-hint: 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-(.venv) raihan@hp:~/Documents/Django/Django_E-Commerce_Backend_Project$ git status
-On branch master
-Your branch is ahead of 'origin/master' by 2 commits.
-  (use "git push" to publish your local commits)
-
-nothing to commit, working tree clean
-(.venv) raihan@hp:~/Documents/Django/Django_E-Commerce_Backend_Project$ git push -
+        return JsonResponse({"status": False, "message": "Product not found"}, status=404)
 
     details = list(ProductDetail.objects.filter(product_id=product_id).values(
         "img1", "img2", "img3", "img4",
